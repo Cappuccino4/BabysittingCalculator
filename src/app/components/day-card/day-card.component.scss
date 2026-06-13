@@ -1,0 +1,208 @@
+:host {
+  display: block;
+}
+
+.day-card {
+  transition: box-shadow 0.15s;
+
+  &.today {
+    border: 2px solid var(--color-today-border);
+    background: var(--color-today-bg);
+  }
+}
+
+.day-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 14px 16px 0;
+}
+
+.day-info {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.day-name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.day-date {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.today-badge {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-primary-dark);
+  background: var(--color-primary-light);
+  padding: 2px 8px;
+  border-radius: var(--radius-full);
+}
+
+.day-totals {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.day-stat {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  em {
+    font-style: normal;
+    color: var(--color-text-muted);
+  }
+}
+
+.day-pay {
+  font-size: 14px;
+  font-weight: 800;
+  color: var(--color-primary-dark);
+}
+
+// ── Blocks list ──────────────────────────────────────────────────────────────
+.blocks-list {
+  margin-top: 10px;
+  padding: 0 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.block-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 10px 0;
+  border-top: 1px solid var(--color-border);
+
+  &:first-child {
+    border-top: none;
+  }
+}
+
+.block-main {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
+
+.block-time {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-text);
+}
+
+.block-meta {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  flex-wrap: wrap;
+}
+
+.block-who {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  background: var(--color-surface-raised);
+  border: 1px solid var(--color-border);
+  padding: 1px 8px;
+  border-radius: var(--radius-full);
+
+  &.both {
+    color: var(--color-primary-dark);
+    background: var(--color-primary-bg);
+    border-color: var(--color-primary-light);
+  }
+}
+
+.block-dot {
+  color: var(--color-text-muted);
+  font-size: 12px;
+}
+
+.block-hours {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+}
+
+.block-pay {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--color-text);
+}
+
+.block-note {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  font-style: italic;
+}
+
+.block-actions {
+  display: flex;
+  gap: 4px;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  color: var(--color-text-muted);
+  transition: background 0.15s, color 0.15s;
+
+  &:hover {
+    background: var(--color-bg);
+    color: var(--color-text-secondary);
+  }
+
+  &--danger:hover {
+    background: var(--color-error-bg);
+    color: var(--color-error);
+  }
+}
+
+// ── Empty / Add row ──────────────────────────────────────────────────────────
+.empty-day {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  padding: 10px 16px 4px;
+  font-style: italic;
+}
+
+.add-row {
+  padding: 10px 16px 14px;
+  border-top: 1px solid var(--color-border);
+  margin-top: 6px;
+
+  .add-btn {
+    color: var(--color-primary);
+    font-size: 14px;
+    font-weight: 600;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    border: 1.5px dashed var(--color-primary-light);
+
+    &:hover {
+      background: var(--color-primary-bg);
+      border-color: var(--color-primary);
+    }
+  }
+}

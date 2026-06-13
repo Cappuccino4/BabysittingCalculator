@@ -1,0 +1,23 @@
+<div class="app-shell">
+  <main class="app-main">
+    <router-outlet />
+  </main>
+
+  <nav class="bottom-nav" role="navigation" aria-label="Main navigation">
+    <a routerLink="/weekly" routerLinkActive="active" class="nav-tab" aria-label="Weekly view">
+      <span class="nav-icon">
+        <lucide-icon [img]="CalendarIcon" [size]="22"></lucide-icon>
+      </span>
+      <span class="nav-label">Weekly</span>
+    </a>
+    <a routerLink="/overall" routerLinkActive="active" class="nav-tab" aria-label="Overall summary">
+      <span class="nav-icon">
+        <lucide-icon [img]="TrendingUpIcon" [size]="22"></lucide-icon>
+      </span>
+      <span class="nav-label">Overall</span>
+    </a>
+  </nav>
+
+  <app-snackbar />
+  <app-confirm-dialog />
+</div>

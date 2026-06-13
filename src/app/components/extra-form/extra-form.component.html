@@ -1,0 +1,59 @@
+<div class="overlay" (click)="onOverlayClick($event)" role="dialog" aria-modal="true" [attr.aria-label]="title">
+  <div class="sheet">
+    <div class="sheet-handle"></div>
+
+    <div class="sheet-header">
+      <h2>{{ title }}</h2>
+      <button class="icon-btn" (click)="closeModal.emit()" aria-label="Close">
+        <lucide-icon [img]="XIcon" [size]="20"></lucide-icon>
+      </button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" novalidate>
+      <div class="sheet-body">
+
+        <div class="form-field">
+          <label for="ex-date">Date</label>
+          <input id="ex-date" type="date" formControlName="date" />
+          @if (submitted && form.get('date')?.invalid) {
+            <span class="field-error">Date is required.</span>
+          }
+        </div>
+
+        <div class="form-field">
+          <label for="ex-desc">Description</label>
+          <input id="ex-desc" type="text" formControlName="description"
+            placeholder="e.g. Mileage reimbursement" maxlength="200" />
+          @if (submitted && form.get('description')?.invalid) {
+            <span class="field-error">Description is required.</span>
+          }
+        </div>
+
+        <div class="form-field">
+          <label for="ex-amount">Amount ($)</label>
+          <input id="ex-amount" type="number" formControlName="amount"
+            placeholder="0.00" min="0" step="0.01" />
+          @if (submitted && form.get('amount')?.invalid) {
+            <span class="field-error">Enter a valid amount greater than $0.</span>
+          }
+        </div>
+
+        <div class="form-field">
+          <label for="ex-note">Note <span class="optional">(optional)</span></label>
+          <input id="ex-note" type="text" formControlName="note"
+            placeholder="Any extra detail" maxlength="200" />
+        </div>
+
+      </div>
+
+      <div class="sheet-footer">
+        <button type="submit" class="btn btn--primary btn--full btn--lg">
+          {{ isEditing ? 'Save Changes' : 'Add Extra' }}
+        </button>
+        <button type="button" class="btn btn--ghost btn--full" (click)="closeModal.emit()">
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

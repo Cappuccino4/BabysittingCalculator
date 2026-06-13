@@ -1,0 +1,69 @@
+<div class="day-card card" [class.today]="isToday">
+  <!-- ── Day header ─────────────────────────────────────────────── -->
+  <div class="day-header">
+    <div class="day-info">
+      <span class="day-name">{{ dayHeading.weekday }}</span>
+      <span class="day-date">{{ dayHeading.date }}</span>
+      @if (isToday) {
+        <span class="today-badge">Today</span>
+      }
+    </div>
+
+    @if (dayBlocks.length > 0) {
+      <div class="day-totals">
+        @if (dayStats.oneChildHours > 0) {
+          <span class="day-stat">{{ formatHours(dayStats.oneChildHours) }} <em>one</em></span>
+        }
+        @if (dayStats.bothChildrenHours > 0) {
+          <span class="day-stat">{{ formatHours(dayStats.bothChildrenHours) }} <em>both</em></span>
+        }
+        <span class="day-pay">{{ formatCurrency(dayStats.totalPay) }}</span>
+      </div>
+    }
+  </div>
+
+  <!-- ── Time blocks list ──────────────────────────────────────── -->
+  @if (dayBlocks.length > 0) {
+    <div class="blocks-list">
+      @for (block of dayBlocks; track block.id) {
+        <div class="block-row">
+          <div class="block-main">
+            <span class="block-time">
+              {{ formatTime(block.startTime) }} – {{ formatTime(block.endTime) }}
+            </span>
+            <span class="block-meta">
+              <span class="block-who" [class.both]="block.childCount === 2">
+                {{ block.childCount === 1 ? 'One child' : 'Both children' }}
+              </span>
+              <span class="block-dot">·</span>
+              <span class="block-hours">{{ blockHours(block) }}</span>
+              <span class="block-dot">·</span>
+              <span class="block-pay">{{ formatCurrency(blockPayment(block)) }}</span>
+            </span>
+            @if (block.note) {
+              <span class="block-note">{{ block.note }}</span>
+            }
+          </div>
+          <div class="block-actions">
+            <button class="action-btn" (click)="editBlock.emit(block)" aria-label="Edit">
+              <lucide-icon [img]="PencilIcon" [size]="15"></lucide-icon>
+            </button>
+            <button class="action-btn action-btn--danger" (click)="deleteBlock.emit(block.id)" aria-label="Delete">
+              <lucide-icon [img]="Trash2Icon" [size]="15"></lucide-icon>
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+  } @else {
+    <p class="empty-day">No time added for {{ dayHeading.weekday }}.</p>
+  }
+
+  <!-- ── Add button ────────────────────────────────────────────── -->
+  <div class="add-row">
+    <button class="add-btn btn btn--ghost btn--full" (click)="addBlock.emit(dateStr)">
+      <lucide-icon [img]="PlusIcon" [size]="16"></lucide-icon>
+      Add Time
+    </button>
+  </div>
+</div>

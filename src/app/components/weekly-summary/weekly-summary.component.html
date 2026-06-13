@@ -1,0 +1,71 @@
+<div class="summary-section">
+  <!-- ── Weekly summary card ─────────────────────────────────────── -->
+  <div class="summary-card card">
+    <div class="summary-title">Weekly Summary</div>
+
+    <div class="summary-rows">
+      <div class="summary-row">
+        <span class="summary-label">One-child hours</span>
+        <span class="summary-value">{{ fmtH(weekStats.oneChildHours) }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="summary-label">Both-children hours</span>
+        <span class="summary-value">{{ fmtH(weekStats.bothChildrenHours) }}</span>
+      </div>
+      <div class="summary-row">
+        <span class="summary-label">Time block pay</span>
+        <span class="summary-value">{{ fmt(weekStats.blocksPay) }}</span>
+      </div>
+      @if (weekStats.extrasPay > 0) {
+        <div class="summary-row">
+          <span class="summary-label">Extras</span>
+          <span class="summary-value">{{ fmt(weekStats.extrasPay) }}</span>
+        </div>
+      }
+      <div class="summary-row summary-row--total">
+        <span class="summary-label">Total owed</span>
+        <span class="summary-value summary-value--total">{{ fmt(weekStats.grandTotal) }}</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Extras section ────────────────────────────────────────── -->
+  <div class="extras-section card">
+    <div class="extras-header">
+      <span class="extras-title">Extras</span>
+      <button class="add-extra-btn btn btn--ghost btn--sm" (click)="addExtra.emit()">
+        <lucide-icon [img]="PlusIcon" [size]="14"></lucide-icon>
+        Add Extra
+      </button>
+    </div>
+
+    @if (extras.length === 0) {
+      <p class="extras-empty">No extras this week. Tap "Add Extra" to include mileage, purchases, or adjustments.</p>
+    } @else {
+      <div class="extras-list">
+        @for (extra of extras; track extra.id) {
+          <div class="extra-row">
+            <div class="extra-main">
+              <span class="extra-desc">{{ extra.description }}</span>
+              <span class="extra-date">{{ fmtDate(extra.date) }}</span>
+              @if (extra.note) {
+                <span class="extra-note">{{ extra.note }}</span>
+              }
+            </div>
+            <div class="extra-right">
+              <span class="extra-amount">{{ fmt(extra.amount) }}</span>
+              <div class="extra-actions">
+                <button class="action-btn" (click)="editExtra.emit(extra)" aria-label="Edit extra">
+                  <lucide-icon [img]="PencilIcon" [size]="14"></lucide-icon>
+                </button>
+                <button class="action-btn action-btn--danger" (click)="deleteExtra.emit(extra.id)" aria-label="Delete extra">
+                  <lucide-icon [img]="Trash2Icon" [size]="14"></lucide-icon>
+                </button>
+              </div>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>

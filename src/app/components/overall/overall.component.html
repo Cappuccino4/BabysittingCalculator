@@ -1,0 +1,76 @@
+<div class="overall-page page">
+
+  <!-- ── All-time stats ──────────────────────────────────────────── -->
+  <div class="stats-card card">
+    <div class="stats-title">All-Time Summary</div>
+    <div class="stats-grid">
+      <div class="stat-item stat-item--primary">
+        <span class="stat-value">{{ fmt(overallStats().totalEarnings) }}</span>
+        <span class="stat-label">Total Earned</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">{{ fmtH(overallStats().oneChildHours) }}</span>
+        <span class="stat-label">One-Child Hrs</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">{{ fmtH(overallStats().bothChildrenHours) }}</span>
+        <span class="stat-label">Both-Child Hrs</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">{{ fmt(overallStats().totalExtras) }}</span>
+        <span class="stat-label">Extras</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-value">{{ overallStats().weeksWithEntries }}</span>
+        <span class="stat-label">Weeks Worked</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Filter + heading ────────────────────────────────────────── -->
+  <div class="weeks-header">
+    <span class="weeks-heading">Weekly History</span>
+    @if (monthYearOptions().length > 1) {
+      <select class="month-filter" [value]="filterMonthYear()" (change)="onFilterChange($any($event.target).value)" aria-label="Filter by month">
+        <option value="">All time</option>
+        @for (opt of monthYearOptions(); track opt.value) {
+          <option [value]="opt.value">{{ opt.label }}</option>
+        }
+      </select>
+    }
+  </div>
+
+  <!-- ── Week list ───────────────────────────────────────────────── -->
+  @if (filteredWeekRows().length === 0) {
+    <div class="empty-state card">
+      <p class="empty-title">No weeks recorded yet.</p>
+      <p class="empty-sub">Head to the Weekly tab, add some time blocks, and they'll appear here.</p>
+    </div>
+  } @else {
+    <div class="weeks-list">
+      @for (row of filteredWeekRows(); track row.weekKey) {
+        <button class="week-row card" (click)="goToWeek(row.weekKey)" [attr.aria-label]="'View week ' + row.label">
+          <div class="week-row-main">
+            <span class="week-row-label">{{ row.label }}</span>
+            <div class="week-row-stats">
+              @if (row.stats.oneChildHours > 0) {
+                <span class="week-chip">{{ fmtH(row.stats.oneChildHours) }} one</span>
+              }
+              @if (row.stats.bothChildrenHours > 0) {
+                <span class="week-chip week-chip--both">{{ fmtH(row.stats.bothChildrenHours) }} both</span>
+              }
+              @if (row.stats.extrasPay > 0) {
+                <span class="week-chip week-chip--extra">+{{ fmt(row.stats.extrasPay) }} extras</span>
+              }
+            </div>
+          </div>
+          <div class="week-row-right">
+            <span class="week-row-total">{{ fmt(row.stats.grandTotal) }}</span>
+            <lucide-icon [img]="ChevronRightIcon" [size]="16" style="color: var(--color-text-muted);"></lucide-icon>
+          </div>
+        </button>
+      }
+    </div>
+  }
+
+</div>
