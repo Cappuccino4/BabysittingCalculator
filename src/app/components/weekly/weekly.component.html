@@ -15,6 +15,9 @@
       </div>
 
       <div class="week-right">
+        <button class="icon-btn" (click)="showShare.set(true)" aria-label="Screenshot summary">
+          <lucide-icon [img]="CameraIcon" [size]="18"></lucide-icon>
+        </button>
         <button class="icon-btn" (click)="showSettings.set(true)" aria-label="Settings">
           <lucide-icon [img]="Settings2Icon" [size]="18"></lucide-icon>
         </button>
@@ -83,5 +86,16 @@
     [rates]="rates()"
     (save)="onSaveSettings($event)"
     (closeModal)="showSettings.set(false)"
+  />
+}
+
+@if (showShare()) {
+  <app-share-summary
+    [weekKey]="currentWeekKey()"
+    [blocks]="weekBlocks()"
+    [extras]="weekExtras()"
+    [rates]="rates()"
+    [weekStats]="weekStats()"
+    (closeShare)="showShare.set(false)"
   />
 }

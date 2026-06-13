@@ -1,5 +1,5 @@
 import { Component, inject, signal, computed, OnInit } from '@angular/core';
-import { LucideAngularModule, ChevronLeft, ChevronRight, Settings2, Plus } from 'lucide-angular';
+import { LucideAngularModule, ChevronLeft, ChevronRight, Settings2, Plus, Camera } from 'lucide-angular';
 import { StorageService } from '../../services/storage.service';
 import { CalcService } from '../../services/calc.service';
 import { WeekService } from '../../services/week.service';
@@ -13,6 +13,7 @@ import { TimeBlockFormComponent } from '../time-block-form/time-block-form.compo
 import { ExtraFormComponent } from '../extra-form/extra-form.component';
 import { WeeklySummaryComponent } from '../weekly-summary/weekly-summary.component';
 import { SettingsModalComponent } from '../settings-modal/settings-modal.component';
+import { ShareSummaryComponent } from '../share-summary/share-summary.component';
 
 @Component({
   selector: 'app-weekly',
@@ -24,6 +25,7 @@ import { SettingsModalComponent } from '../settings-modal/settings-modal.compone
     ExtraFormComponent,
     WeeklySummaryComponent,
     SettingsModalComponent,
+    ShareSummaryComponent,
   ],
   templateUrl: './weekly.component.html',
   styleUrl: './weekly.component.scss',
@@ -39,6 +41,7 @@ export class WeeklyComponent implements OnInit {
   readonly ChevronRightIcon = ChevronRight;
   readonly Settings2Icon = Settings2;
   readonly PlusIcon = Plus;
+  readonly CameraIcon = Camera;
 
   // ── Navigation state ─────────────────────────────────────────────────────────
   currentWeekKey = signal(this.weekSvc.getCurrentWeekKey());
@@ -80,6 +83,7 @@ export class WeeklyComponent implements OnInit {
   editingExtra = signal<WeeklyExtra | null>(null);
 
   showSettings = signal(false);
+  showShare = signal(false);
 
   // ── Lifecycle ─────────────────────────────────────────────────────────────────
   ngOnInit(): void {

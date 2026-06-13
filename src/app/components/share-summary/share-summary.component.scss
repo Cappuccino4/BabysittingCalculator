@@ -1,0 +1,235 @@
+:host { display: contents; }
+
+.share-overlay {
+  position: fixed;
+  inset: 0;
+  background: #1a2332;
+  z-index: 300;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 16px 40px;
+  gap: 16px;
+}
+
+// ── Top bar ───────────────────────────────────────────────────────────────────
+.close-bar {
+  width: 100%;
+  max-width: 480px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.close-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: rgba(255, 255, 255, 0.12);
+  border: none;
+  cursor: pointer;
+  transition: background 0.15s;
+
+  &:hover { background: rgba(255, 255, 255, 0.2); }
+}
+
+.hint-text {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.45);
+  text-align: right;
+}
+
+// ── The shareable card ────────────────────────────────────────────────────────
+.summary-card {
+  width: 100%;
+  max-width: 480px;
+  background: #ffffff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card-header {
+  background: #1a2332;
+  color: #fff;
+  padding: 22px 20px 18px;
+}
+
+.card-title {
+  font-size: 12px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: rgba(255, 255, 255, 0.55);
+  margin-bottom: 4px;
+}
+
+.card-week {
+  font-size: 20px;
+  font-weight: 800;
+  color: #fff;
+}
+
+// ── Day sections ──────────────────────────────────────────────────────────────
+.day-section {
+  padding: 0 20px;
+  border-bottom: 1px solid #eef2f8;
+
+  &:last-of-type { border-bottom: none; }
+}
+
+.day-heading {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 12px 0 6px;
+}
+
+.day-name {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a2332;
+  flex: 1;
+}
+
+.day-date {
+  font-size: 12px;
+  color: #8fa0b4;
+}
+
+.day-pay {
+  font-size: 14px;
+  font-weight: 700;
+  color: #2563eb;
+  margin-left: auto;
+}
+
+.block-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 5px 0;
+  font-size: 13px;
+}
+
+.block-time {
+  color: #1a2332;
+  font-weight: 500;
+  min-width: 130px;
+  flex-shrink: 0;
+}
+
+.block-who {
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 999px;
+  background: #f1f5f9;
+  color: #5a6a7e;
+  flex-shrink: 0;
+
+  &.both {
+    background: #dbeafe;
+    color: #1d4ed8;
+  }
+}
+
+.block-hours {
+  color: #8fa0b4;
+  font-size: 12px;
+  flex: 1;
+  text-align: right;
+}
+
+.block-pay {
+  font-size: 13px;
+  font-weight: 600;
+  color: #1a2332;
+  min-width: 52px;
+  text-align: right;
+  flex-shrink: 0;
+}
+
+.day-subtotal {
+  display: flex;
+  gap: 10px;
+  padding: 4px 0 10px;
+  font-size: 11px;
+  color: #8fa0b4;
+}
+
+// ── Divider / totals ──────────────────────────────────────────────────────────
+.divider {
+  height: 6px;
+  background: #eef5fd;
+}
+
+.totals-section {
+  padding: 14px 20px 4px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 7px 0;
+  font-size: 14px;
+  color: #1a2332;
+  border-bottom: 1px solid #eef2f8;
+
+  &:last-child { border-bottom: none; }
+
+  span:last-child {
+    font-weight: 600;
+  }
+}
+
+.extra-row {
+  color: #5a6a7e;
+  font-size: 13px;
+}
+
+.grand-total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 0 10px;
+  margin-top: 4px;
+  border-top: 2px solid #dbeafe;
+
+  span:first-child {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a2332;
+  }
+
+  span:last-child {
+    font-size: 24px;
+    font-weight: 800;
+    color: #2563eb;
+  }
+}
+
+.no-entries {
+  padding: 24px 20px;
+  font-size: 14px;
+  color: #8fa0b4;
+  text-align: center;
+  font-style: italic;
+}
+
+.card-footer {
+  padding: 12px 20px;
+  font-size: 11px;
+  color: #b0bfcc;
+  text-align: right;
+  border-top: 1px solid #eef2f8;
+}

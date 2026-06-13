@@ -1,0 +1,99 @@
+<div class="share-overlay">
+
+  <!-- Close button — visible on screen, won't appear in a tight crop -->
+  <div class="close-bar">
+    <button class="close-btn" (click)="closeShare.emit()" aria-label="Close">
+      <lucide-icon [img]="XIcon" [size]="20"></lucide-icon>
+      Done
+    </button>
+    <span class="hint-text">Take a screenshot of the card below</span>
+  </div>
+
+  <!-- ── The shareable card ── -->
+  <div class="summary-card">
+
+    <div class="card-header">
+      <div class="card-title">Childcare Summary</div>
+      <div class="card-week">{{ weekLabel }}</div>
+    </div>
+
+    @if (activeDays.length === 0) {
+      <div class="no-entries">No time entries this week.</div>
+    } @else {
+      <!-- Day rows -->
+      @for (day of activeDays; track day.date) {
+        <div class="day-section">
+          <div class="day-heading">
+            <span class="day-name">{{ day.weekday }}</span>
+            <span class="day-date">{{ day.date }}</span>
+            <span class="day-pay">{{ fmt(day.totalPay) }}</span>
+          </div>
+
+          @for (block of day.blocks; track block.id) {
+            <div class="block-row">
+              <span class="block-time">
+                {{ formatTime(block.startTime) }} – {{ formatTime(block.endTime) }}
+              </span>
+              <span class="block-who" [class.both]="block.childCount === 2">
+                {{ block.childCount === 1 ? 'One child' : 'Both children' }}
+              </span>
+              <span class="block-hours">{{ blockHours(block) }}</span>
+              <span class="block-pay">{{ blockPay(block) }}</span>
+            </div>
+          }
+
+          @if (day.blocks.length > 1) {
+            <div class="day-subtotal">
+              @if (day.oneChildHours > 0) {
+                <span>{{ fmtH(day.oneChildHours) }} one-child</span>
+              }
+              @if (day.bothChildrenHours > 0) {
+                <span>{{ fmtH(day.bothChildrenHours) }} both</span>
+              }
+            </div>
+          }
+        </div>
+      }
+    }
+
+    <!-- Divider -->
+    <div class="divider"></div>
+
+    <!-- Weekly totals -->
+    <div class="totals-section">
+      @if (weekStats.oneChildHours > 0) {
+        <div class="total-row">
+          <span>One-child hours</span>
+          <span>{{ fmtH(weekStats.oneChildHours) }}</span>
+        </div>
+      }
+      @if (weekStats.bothChildrenHours > 0) {
+        <div class="total-row">
+          <span>Both-children hours</span>
+          <span>{{ fmtH(weekStats.bothChildrenHours) }}</span>
+        </div>
+      }
+      <div class="total-row">
+        <span>Time block pay</span>
+        <span>{{ fmt(weekStats.blocksPay) }}</span>
+      </div>
+
+      @if (extras.length > 0) {
+        @for (extra of extras; track extra.id) {
+          <div class="total-row extra-row">
+            <span>{{ extra.description }}</span>
+            <span>{{ fmt(extra.amount) }}</span>
+          </div>
+        }
+      }
+
+      <div class="grand-total-row">
+        <span>Total owed</span>
+        <span>{{ fmt(weekStats.grandTotal) }}</span>
+      </div>
+    </div>
+
+    <div class="card-footer">Generated {{ today }}</div>
+  </div>
+
+</div>
